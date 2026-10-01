@@ -124,3 +124,40 @@ xcodebuild build-for-testing -project Compositor.xcodeproj -scheme Compositor \
 
 `LocalizationTests.everyCatalogKeyHasChinese` fails the suite if any key loses its `zh-Hans`
 value, so a rebase that drops translations is caught rather than shipped.
+
+## What is deliberately not translated
+
+Excluded on purpose, not missed. Adding these to the catalog would either break something or put
+the language somewhere it does not belong.
+
+- **SF Symbol names** — `NavigationTool.symbol`, and every `Image(systemName:)` argument. They are
+  identifiers, not text; translating one breaks the icon.
+- **Keyboard glyphs and unit letters** — `⌘ ⌥ ⇧ ⌃ ⌫ ⏎`, the `…` menu suffix, `R`, `G`, `B` (channel
+  letters, which Photoshop keeps as-is), `X`, `Y` (axis letters) and `°`. They read the same in
+  every language.
+- **Persisted enum `rawValue`s** — blend modes, adjustment kinds, brush modes and effect kinds
+  write their English `rawValue` into `.comp` files. Only their display labels are localized, so the
+  language never reaches a saved project. For the same reason the default names a new document hands
+  out (`Layer 1`, `Folder 1`) stay English: they are document data, and localizing them would leave
+  a project with names in whichever language happened to be active when each layer was created.
+- **Model-level identifiers** — `DocumentHistory.undoName` / `redoName` stay English. The Undo and
+  Redo menu items localize both the template and the name when they display it (`"Undo %@"` plus the
+  looked-up name), so the interface is Chinese while the history records something stable whose
+  meaning does not change with the language.
+- **Shader source** — the Metal strings under `Rendering/` are compiled code.
+
+### Why the Info.plist names are still English
+
+`CFBundleTypeName` ("Images", "Compositor Project") and `UTTypeDescription` ("Compositor Layer",
+"Adobe Photoshop Document", …) are visible to the user — Finder's Kind column, and the file-type
+popup in the open and save panels. They are **not** localized here, and that is a limitation of the
+mechanism rather than an oversight: `InfoPlist.strings` and `InfoPlist.xcstrings` only localize
+**root-level** Info.plist keys, and these live inside the array-of-dictionaries under
+`CFBundleDocumentTypes`, `UTExportedTypeDeclarations` and `UTImportedTypeDeclarations`. Reaching them
+would mean restructuring how the app declares its document types, and localizing several entries
+that share one key (`CFBundleTypeName` appears twice) is ambiguous by construction.
+
+So no `InfoPlist.strings` is shipped. An empty or partial one would look like it worked and quietly
+do nothing, which is worse than leaving the names in English. The only root-level user-visible keys
+this app has are `CFBundleName` (the product name, which should not be translated) and
+`NSHumanReadableCopyright` (empty).
