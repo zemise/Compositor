@@ -117,13 +117,13 @@ struct NativeLayerList: NSViewRepresentable {
             let menu = NSMenu()
 
             // 1. Duplicate Layer
-            let duplicateItem = NSMenuItem(title: "Duplicate Layer", action: #selector(duplicateLayerAction), keyEquivalent: "")
+            let duplicateItem = NSMenuItem(title: LocalizationManager.localizedString("Duplicate Layer"), action: #selector(duplicateLayerAction), keyEquivalent: "")
             duplicateItem.target = self
             duplicateItem.isEnabled = validateMenuItem(duplicateItem)
             menu.addItem(duplicateItem)
 
             // 2. Rename…
-            let renameItem = NSMenuItem(title: "Rename…", action: #selector(renameLayerAction), keyEquivalent: "")
+            let renameItem = NSMenuItem(title: LocalizationManager.localizedString("Rename…"), action: #selector(renameLayerAction), keyEquivalent: "")
             renameItem.target = self
             renameItem.isEnabled = validateMenuItem(renameItem)
             menu.addItem(renameItem)
@@ -137,7 +137,7 @@ struct NativeLayerList: NSViewRepresentable {
             } else {
                 deleteTitle = "Delete Layer"
             }
-            let deleteItem = NSMenuItem(title: deleteTitle, action: #selector(deleteLayerAction), keyEquivalent: "")
+            let deleteItem = NSMenuItem(title: LocalizationManager.localizedString(deleteTitle), action: #selector(deleteLayerAction), keyEquivalent: "")
             deleteItem.target = self
             deleteItem.isEnabled = validateMenuItem(deleteItem)
             menu.addItem(deleteItem)
@@ -146,33 +146,33 @@ struct NativeLayerList: NSViewRepresentable {
 
             // 4. Create Clipping Mask / Release Clipping Mask
             let clippingTitle = session.activeLayer?.maskSourceID != nil ? "Release Clipping Mask" : "Create Clipping Mask"
-            let clippingItem = NSMenuItem(title: clippingTitle, action: #selector(toggleClippingMaskAction), keyEquivalent: "")
+            let clippingItem = NSMenuItem(title: LocalizationManager.localizedString(clippingTitle), action: #selector(toggleClippingMaskAction), keyEquivalent: "")
             clippingItem.target = self
             clippingItem.isEnabled = validateMenuItem(clippingItem)
             menu.addItem(clippingItem)
 
             // 5. Group Selected Layers
-            let groupItem = NSMenuItem(title: "Group Selected Layers", action: #selector(groupSelectedLayersAction), keyEquivalent: "")
+            let groupItem = NSMenuItem(title: LocalizationManager.localizedString("Group Selected Layers"), action: #selector(groupSelectedLayersAction), keyEquivalent: "")
             groupItem.target = self
             groupItem.isEnabled = validateMenuItem(groupItem)
             menu.addItem(groupItem)
 
             // A folder right-clicked can be ungrouped: its layers stay where they are, and the folder goes.
             if rows[row].isGroup {
-                let ungroupItem = NSMenuItem(title: "Ungroup Layers", action: #selector(ungroupLayersAction), keyEquivalent: "")
+                let ungroupItem = NSMenuItem(title: LocalizationManager.localizedString("Ungroup Layers"), action: #selector(ungroupLayersAction), keyEquivalent: "")
                 ungroupItem.target = self
                 ungroupItem.isEnabled = validateMenuItem(ungroupItem)
                 menu.addItem(ungroupItem)
             }
 
             // 6. Move Out of Folder
-            let moveOutItem = NSMenuItem(title: "Move Out of Folder", action: #selector(moveOutOfFolderAction), keyEquivalent: "")
+            let moveOutItem = NSMenuItem(title: LocalizationManager.localizedString("Move Out of Folder"), action: #selector(moveOutOfFolderAction), keyEquivalent: "")
             moveOutItem.target = self
             moveOutItem.isEnabled = validateMenuItem(moveOutItem)
             menu.addItem(moveOutItem)
 
             // 7. Merge Down / Merge Layers / Merge Group
-            let mergeItem = NSMenuItem(title: session.mergeTitle, action: #selector(mergeLayersAction), keyEquivalent: "")
+            let mergeItem = NSMenuItem(title: LocalizationManager.localizedString(session.mergeTitle), action: #selector(mergeLayersAction), keyEquivalent: "")
             mergeItem.target = self
             mergeItem.isEnabled = validateMenuItem(mergeItem)
             menu.addItem(mergeItem)
@@ -180,13 +180,13 @@ struct NativeLayerList: NSViewRepresentable {
             menu.addItem(NSMenuItem.separator())
 
             // 8. Add Mask >
-            let addMaskItem = NSMenuItem(title: "Add Mask", action: nil, keyEquivalent: "")
-            let addMaskSubmenu = NSMenu(title: "Add Mask")
-            let revealAllItem = NSMenuItem(title: "Reveal All (White)", action: #selector(addWhiteMaskAction), keyEquivalent: "")
+            let addMaskItem = NSMenuItem(title: LocalizationManager.localizedString("Add Mask"), action: nil, keyEquivalent: "")
+            let addMaskSubmenu = NSMenu(title: LocalizationManager.localizedString("Add Mask"))
+            let revealAllItem = NSMenuItem(title: LocalizationManager.localizedString("Reveal All (White)"), action: #selector(addWhiteMaskAction), keyEquivalent: "")
             revealAllItem.target = self
             revealAllItem.isEnabled = validateMenuItem(revealAllItem)
             addMaskSubmenu.addItem(revealAllItem)
-            let hideAllItem = NSMenuItem(title: "Hide All (Black)", action: #selector(addBlackMaskAction), keyEquivalent: "")
+            let hideAllItem = NSMenuItem(title: LocalizationManager.localizedString("Hide All (Black)"), action: #selector(addBlackMaskAction), keyEquivalent: "")
             hideAllItem.target = self
             hideAllItem.isEnabled = validateMenuItem(hideAllItem)
             addMaskSubmenu.addItem(hideAllItem)
@@ -196,20 +196,20 @@ struct NativeLayerList: NSViewRepresentable {
 
             // 9. Enable Mask / Disable Mask
             let toggleMaskTitle = session.activeLayer?.mask?.isEnabled == false ? "Enable Mask" : "Disable Mask"
-            let toggleMaskItem = NSMenuItem(title: toggleMaskTitle, action: #selector(toggleMaskAction), keyEquivalent: "")
+            let toggleMaskItem = NSMenuItem(title: LocalizationManager.localizedString(toggleMaskTitle), action: #selector(toggleMaskAction), keyEquivalent: "")
             toggleMaskItem.target = self
             toggleMaskItem.isEnabled = validateMenuItem(toggleMaskItem)
             menu.addItem(toggleMaskItem)
 
             // 10. Delete Mask
-            let deleteMaskItem = NSMenuItem(title: "Delete Mask", action: #selector(deleteMaskAction), keyEquivalent: "")
+            let deleteMaskItem = NSMenuItem(title: LocalizationManager.localizedString("Delete Mask"), action: #selector(deleteMaskAction), keyEquivalent: "")
             deleteMaskItem.target = self
             deleteMaskItem.isEnabled = validateMenuItem(deleteMaskItem)
             menu.addItem(deleteMaskItem)
 
             // 11. Link Mask / Unlink Mask
             let linkMaskTitle = session.activeLayer?.mask?.isLinked == false ? "Link Mask" : "Unlink Mask"
-            let linkMaskItem = NSMenuItem(title: linkMaskTitle, action: #selector(toggleMaskLinkAction), keyEquivalent: "")
+            let linkMaskItem = NSMenuItem(title: LocalizationManager.localizedString(linkMaskTitle), action: #selector(toggleMaskLinkAction), keyEquivalent: "")
             linkMaskItem.target = self
             linkMaskItem.isEnabled = validateMenuItem(linkMaskItem)
             menu.addItem(linkMaskItem)
@@ -218,7 +218,7 @@ struct NativeLayerList: NSViewRepresentable {
 
             // 12. Hide Layer / Show Layer
             let visibilityTitle = session.activeLayer?.isVisible == false ? "Show Layer" : "Hide Layer"
-            let visibilityItem = NSMenuItem(title: visibilityTitle, action: #selector(toggleVisibilityAction), keyEquivalent: "")
+            let visibilityItem = NSMenuItem(title: LocalizationManager.localizedString(visibilityTitle), action: #selector(toggleVisibilityAction), keyEquivalent: "")
             visibilityItem.target = self
             visibilityItem.isEnabled = validateMenuItem(visibilityItem)
             menu.addItem(visibilityItem)
@@ -255,7 +255,7 @@ struct NativeLayerList: NSViewRepresentable {
             case #selector(toggleVisibilityAction):
                 return session.canEditLayers && session.activeLayer != nil
             default:
-                if menuItem.submenu != nil && menuItem.title == "Add Mask" {
+                if menuItem.submenu != nil && menuItem.title == LocalizationManager.localizedString("Add Mask") {
                     return session.canEditMask && session.activeLayer?.mask == nil
                 }
                 return true
@@ -547,7 +547,7 @@ final class LayerTableView: NSTableView {
             drawOutlined(box, in: NSRect(x: 10, y: 1, width: 19, height: 17))
             return true
         }
-        image.accessibilityDescription = releasing ? "Release clipping mask" : "Create clipping mask"
+        image.accessibilityDescription = LocalizationManager.localizedString(releasing ? "Release clipping mask" : "Create clipping mask")
         return NSCursor(image: image, hotSpot: NSPoint(x: 3, y: 3))
     }
     private static let createClippingCursor = clippingCursor(releasing: false)
@@ -572,7 +572,7 @@ final class LayerTableView: NSTableView {
                             fraction: 1, respectFlipped: true, hints: nil)
             return true
         }
-        image.accessibilityDescription = "Show mask alone"
+        image.accessibilityDescription = LocalizationManager.localizedString("Show mask alone")
         return NSCursor(image: image, hotSpot: base.hotSpot)
     }()
     override func updateTrackingAreas() {
@@ -768,7 +768,7 @@ private final class LayerCell: NSTableCellView, NSTextFieldDelegate {
     private var maskGap: NSLayoutConstraint!
     /// The chain symbol runs corner to corner; turned 45° counterclockwise it stands upright in a narrow gap.
     private static let linkImage: NSImage? = {
-        guard let symbol = NSImage(systemSymbolName: "link", accessibilityDescription: "Linked")?
+        guard let symbol = NSImage(systemSymbolName: "link", accessibilityDescription: LocalizationManager.localizedString("Linked"))?
             .withSymbolConfiguration(NSImage.SymbolConfiguration(pointSize: 10, weight: .medium)) else { return nil }
         let side = max(symbol.size.width, symbol.size.height)
         let image = NSImage(size: NSSize(width: ceil(side * 0.7), height: ceil(side * 1.45)), flipped: false) { rect in
@@ -825,7 +825,7 @@ private final class LayerCell: NSTableCellView, NSTextFieldDelegate {
         maskThumbnail.action = #selector(selectMask)
         maskThumbnail.isMaskTarget = true
         thumbnail.loadsSelection = true
-        thumbnail.toolTip = "Select layer; Cmd-click to select its pixels (Cmd-Shift adds, Cmd-Option subtracts)"
+        thumbnail.toolTip = LocalizationManager.localizedString("Select layer; Cmd-click to select its pixels (Cmd-Shift adds, Cmd-Option subtracts)")
         maskThumbnail.imageScaling = .scaleProportionallyUpOrDown
         linkButton.isBordered = false
         linkButton.title = ""
@@ -915,7 +915,7 @@ private final class LayerCell: NSTableCellView, NSTextFieldDelegate {
         indentation.constant = CGFloat(min(depth, 8)) * 24 + (layer.maskSourceID == nil ? 0 : 24)
         disclosure.isHidden = !layer.isGroup
         disclosure.isEnabled = enabled
-        disclosure.image = NSImage(systemSymbolName: session.collapsedGroupIDs.contains(layer.id) ? "chevron.right" : "chevron.down", accessibilityDescription: "Expand or collapse folder")
+        disclosure.image = NSImage(systemSymbolName: session.collapsedGroupIDs.contains(layer.id) ? "chevron.right" : "chevron.down", accessibilityDescription: LocalizationManager.localizedString("Expand or collapse folder"))
         // Pixel layers and masks show the whole canvas with their pixels where they sit, as Photoshop does;
         // editable text, adjustments and folders keep a square icon. Pictures redraw only when what they show changes.
         let canvas = session.document?.size ?? CGSize(width: 1, height: 1)
@@ -926,9 +926,9 @@ private final class LayerCell: NSTableCellView, NSTextFieldDelegate {
         thumbnailHeight.constant = layerSize.height
         let key = ThumbnailKey(image: layer.asset.map { ObjectIdentifier($0.thumbnail) }, transform: layer.transform, canvas: canvas, editableText: editableText)
         if layerID != layer.id || thumbnailKey != key {
-            thumbnail.image = layer.adjustment.map { Self.adjustmentIcon($0.kind.symbol, description: $0.kind.rawValue, quarterTurnClockwise: $0.kind == .curves) }
+            thumbnail.image = layer.adjustment.map { Self.adjustmentIcon($0.kind.symbol, description: LocalizationManager.localizedString($0.kind.rawValue), quarterTurnClockwise: $0.kind == .curves) }
                 ?? (layer.isGroup ? Self.folderIcon
-                    : editableText ? Self.adjustmentIcon("textformat", description: "Editable text")
+                    : editableText ? Self.adjustmentIcon("textformat", description: LocalizationManager.localizedString("Editable text"))
                     : CanvasThumbnail.layer(layer.asset?.thumbnail, transform: layer.transform, canvas: canvas, box: 36))
             thumbnailKey = key
         }
@@ -952,26 +952,26 @@ private final class LayerCell: NSTableCellView, NSTextFieldDelegate {
         linkButton.isHidden = !linkable
         linkButton.image = layer.mask?.isLinked == false ? nil : Self.linkImage
         linkButton.isEnabled = thumbnail.isEnabled
-        linkButton.toolTip = layer.mask?.isLinked == false ? "Link layer and mask so they move together"
-            : "Unlink layer and mask to move or transform them separately"
-        linkButton.setAccessibilityLabel(layer.mask?.isLinked == false ? "Link mask: \(layer.name)" : "Unlink mask: \(layer.name)")
-        thumbnail.toolTip = editableText ? "Editable text layer" : "Select image pixels"
-        maskThumbnail.toolTip = "Select layer mask; Option-click to view it alone; Shift-click to enable/disable; Cmd-click to select its black areas (Cmd-Shift adds, Cmd-Option subtracts)"
-        thumbnail.setAccessibilityLabel("Select \(editableText ? "text" : "image"): \(layer.name)")
-        maskThumbnail.setAccessibilityLabel("Select mask: \(layer.name)")
+        linkButton.toolTip = LocalizationManager.localizedString(layer.mask?.isLinked == false ? "Link layer and mask so they move together"
+            : "Unlink layer and mask to move or transform them separately")
+        linkButton.setAccessibilityLabel(LocalizationManager.localizedFormat(layer.mask?.isLinked == false ? "Link mask: %@" : "Unlink mask: %@", layer.name))
+        thumbnail.toolTip = LocalizationManager.localizedString(editableText ? "Editable text layer" : "Select image pixels")
+        maskThumbnail.toolTip = LocalizationManager.localizedString("Select layer mask; Option-click to view it alone; Shift-click to enable/disable; Cmd-click to select its black areas (Cmd-Shift adds, Cmd-Option subtracts)")
+        thumbnail.setAccessibilityLabel(LocalizationManager.localizedFormat("Select %@: %@", editableText ? LocalizationManager.localizedString("text") : LocalizationManager.localizedString("image"), layer.name))
+        maskThumbnail.setAccessibilityLabel(LocalizationManager.localizedFormat("Select mask: %@", layer.name))
         updateTarget()
         layerName = layer.name
         // A reused cell must not carry another row's half-finished rename.
         if renaming, layerID != layer.id { restoreLabel() }
         if !renaming { nameLabel.stringValue = (layer.maskSourceID == nil ? "" : "↳ ") + layer.name }
-        dimensions.stringValue = layer.liveText != nil ? "Text · Double-click to edit" : layer.adjustment != nil ? "Adjustment · Double-click to edit" : layer.isGroup ? "Folder" : layer.sizeLabel
+        dimensions.stringValue = layer.liveText != nil ? LocalizationManager.localizedString("Text · Double-click to edit") : layer.adjustment != nil ? LocalizationManager.localizedString("Adjustment · Double-click to edit") : layer.isGroup ? LocalizationManager.localizedString("Folder") : layer.sizeLabel
         if let source = layer.maskSourceID {
-            let sourceName = session.document?.layers.first(where: { $0.id == source })?.name ?? "Missing source"
-            dimensions.stringValue = "Clipped to \(sourceName)"
-            dimensions.toolTip = "Clipping mask based on \(sourceName). Option-click the bottom of its row to release."
+            let sourceName = session.document?.layers.first(where: { $0.id == source })?.name ?? LocalizationManager.localizedString("Missing source")
+            dimensions.stringValue = LocalizationManager.localizedFormat("Clipped to %@", sourceName)
+            dimensions.toolTip = LocalizationManager.localizedFormat("Clipping mask based on %@. Option-click the bottom of its row to release.", sourceName)
         } else { dimensions.toolTip = nil }
         eye.image = NSImage(systemSymbolName: layer.isVisible ? "eye" : "eye.slash", accessibilityDescription: nil)
-        eye.setAccessibilityLabel("\(layer.isVisible ? "Hide" : "Show") \(layer.name)")
+        eye.setAccessibilityLabel(LocalizationManager.localizedFormat(layer.isVisible ? "Hide %@" : "Show %@", layer.name))
         eye.isEnabled = enabled
         eye.layerID = layer.id
         eye.session = session
@@ -988,8 +988,8 @@ private final class LayerCell: NSTableCellView, NSTextFieldDelegate {
         if let layer = session?.document?.layers.first(where: { $0.id == layerID }),
            let sourceID = layer.maskSourceID,
            let source = session?.document?.layers.first(where: { $0.id == sourceID }) {
-            dimensions.stringValue = "Clipped to \(source.name)"
-            dimensions.toolTip = "Clipping mask based on \(source.name). Option-click the bottom of its row to release."
+            dimensions.stringValue = LocalizationManager.localizedFormat("Clipped to %@", source.name)
+            dimensions.toolTip = LocalizationManager.localizedFormat("Clipping mask based on %@. Option-click the bottom of its row to release.", source.name)
         }
         let active = session?.activeLayerID == layerID && session?.selectedLayerIDs.count == 1
         let mask = session?.isMaskSelected == true
@@ -1083,7 +1083,7 @@ private final class LayerCell: NSTableCellView, NSTextFieldDelegate {
     private static var adjustmentIcons: [String: NSImage] = [:]
     /// The folder symbol at 80% of the size it would fill the thumbnail slot with.
     private static let folderIcon: NSImage? = {
-        guard let symbol = NSImage(systemSymbolName: "folder", accessibilityDescription: "Folder") else { return nil }
+        guard let symbol = NSImage(systemSymbolName: "folder", accessibilityDescription: LocalizationManager.localizedString("Folder")) else { return nil }
         let fit = 36 * 0.8 / max(symbol.size.width, symbol.size.height)
         let size = NSSize(width: symbol.size.width * fit, height: symbol.size.height * fit)
         let icon = NSImage(size: NSSize(width: 36, height: 36), flipped: false) { bounds in
@@ -1091,7 +1091,7 @@ private final class LayerCell: NSTableCellView, NSTextFieldDelegate {
             return true
         }
         icon.isTemplate = true
-        icon.accessibilityDescription = "Folder"
+        icon.accessibilityDescription = LocalizationManager.localizedString("Folder")
         return icon
     }()
     private static func adjustmentIcon(_ symbolName: String, description: String, quarterTurnClockwise: Bool = false) -> NSImage? {
@@ -1124,7 +1124,7 @@ private final class LayerEffectRow: NSView, NSDraggingSource {
     private let label: NSTextField
     init(session: EditorSession, layerID: UUID, kind: LayerEffectKind, enabled: Bool, indent: CGFloat) {
         self.session = session; self.layerID = layerID; self.kind = kind
-        label = NSTextField(labelWithString: kind.rawValue)
+        label = NSTextField(labelWithString: LocalizationManager.localizedString(kind.rawValue))
         super.init(frame: .zero)
         wantsLayer = true
         translatesAutoresizingMaskIntoConstraints = false
@@ -1135,7 +1135,7 @@ private final class LayerEffectRow: NSView, NSDraggingSource {
         eye.contentTintColor = .secondaryLabelColor
         eye.target = self; eye.action = #selector(toggle)
         eye.isEnabled = session.canEditLayers
-        eye.setAccessibilityLabel((enabled ? "Hide " : "Show ") + kind.rawValue)
+        eye.setAccessibilityLabel(LocalizationManager.localizedFormat(enabled ? "Hide %@" : "Show %@", LocalizationManager.localizedString(kind.rawValue)))
         label.font = .systemFont(ofSize: 11)
         label.textColor = enabled ? .labelColor : .secondaryLabelColor
         label.lineBreakMode = .byTruncatingTail
@@ -1148,10 +1148,10 @@ private final class LayerEffectRow: NSView, NSDraggingSource {
             label.centerYAnchor.constraint(equalTo: centerYAnchor),
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
-        toolTip = "Click to select; double-click to edit; Option-drag to copy " + kind.rawValue.lowercased()
+        toolTip = LocalizationManager.localizedFormat("Click to select; double-click to edit; Option-drag to copy %@", LocalizationManager.localizedString(kind.rawValue).lowercased())
         setAccessibilityElement(true)
         setAccessibilityRole(.group)
-        setAccessibilityLabel(kind.rawValue + " effect")
+        setAccessibilityLabel(LocalizationManager.localizedString(kind.rawValue + " effect"))
         updateSelection()
     }
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

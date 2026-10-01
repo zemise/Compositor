@@ -194,17 +194,17 @@ nonisolated enum CameraRawProcessVersion: String, CaseIterable, Sendable {
     var summary: String {
         switch self {
         case .version1:
-            return "Earliest response. Hue, saturation, and shadow tint move about half as far as Version 6."
+            return LocalizationManager.localizedString("Earliest response. Hue, saturation, and shadow tint move about half as far as Version 6.")
         case .version2:
-            return "A little stronger than Version 1. The sliders below still fall well short of the current look."
+            return LocalizationManager.localizedString("A little stronger than Version 1. The sliders below still fall well short of the current look.")
         case .version3:
-            return "Firmer color than Version 2. Primary shifts stay gentler than the current process."
+            return LocalizationManager.localizedString("Firmer color than Version 2. Primary shifts stay gentler than the current process.")
         case .version4:
-            return "The 2012 response. Calibration reaches most of the strength used by Version 6."
+            return LocalizationManager.localizedString("The 2012 response. Calibration reaches most of the strength used by Version 6.")
         case .version5:
-            return "Close to the current process, with slightly softer primary and shadow shifts."
+            return LocalizationManager.localizedString("Close to the current process, with slightly softer primary and shadow shifts.")
         case .version6:
-            return "Current default. The calibration sliders below apply at full strength."
+            return LocalizationManager.localizedString("Current default. The calibration sliders below apply at full strength.")
         }
     }
 }

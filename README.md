@@ -102,6 +102,10 @@ It needs, all kept outside this repository:
 - notarization credentials saved with `xcrun notarytool store-credentials "compositor-notary" …`
 - [`create-dmg`](https://github.com/create-dmg/create-dmg) (`brew install create-dmg`)
 
+## Localization
+
+Ships in English and Simplified Chinese, switchable at runtime from **Compositor ▸ Language**. All strings live in `Compositor/Localizable.xcstrings`; see [Localization](docs/localization.md).
+
 ## License
 
 MIT — see [LICENSE](LICENSE).

@@ -8,6 +8,7 @@ struct CompositorApp: App {
     var body: some Scene {
         Window("Compositor", id: "editor") {
             ProjectWorkspaceView(applicationDelegate: applicationDelegate).roundedControls()
+                .environment(\.locale, LocalizationManager.shared.locale)
         }
             .defaultSize(width: 1180, height: 780)
             // Files opened from Finder or dropped on the Dock icon go to the app delegate, which imports them into
@@ -20,6 +21,8 @@ struct CompositorApp: App {
             }
             // The project's name is already on its tab, so the toolbar doesn't repeat it as a window title.
             .windowToolbarStyle(.unifiedCompact(showsTitle: false))
+            // Menu titles are LocalizedStringKeys, so the whole menu bar follows this too.
+            .environment(\.locale, LocalizationManager.shared.locale)
             .commands {
                 CommandGroup(replacing: .undoRedo) {
                     // Dialog text fields keep native text undo; document history
@@ -38,9 +41,9 @@ struct CompositorApp: App {
                         }
                             .configuredKeyboardShortcut("z", modifiers: [.command, .shift])
                     } else {
-                        Button(session.history.canUndo ? "Undo \(session.history.undoName)" : "Undo") { session.undo() }
+                        Button(session.history.canUndo ? LocalizationManager.shared.localized("Undo %@", LocalizationManager.shared.localized(session.history.undoName)) : LocalizationManager.shared.localized("Undo")) { session.undo() }
                             .configuredKeyboardShortcut("z").disabled(!session.canUndo)
-                        Button(session.history.canRedo ? "Redo \(session.history.redoName)" : "Redo") { session.redo() }
+                        Button(session.history.canRedo ? LocalizationManager.shared.localized("Redo %@", LocalizationManager.shared.localized(session.history.redoName)) : LocalizationManager.shared.localized("Redo")) { session.redo() }
                             .configuredKeyboardShortcut("z", modifiers: [.command, .shift]).disabled(!session.canRedo)
                     }
                 }
@@ -94,6 +97,13 @@ struct CompositorApp: App {
                 Group {
                     CommandGroup(after: .appInfo) {
                         Button("Check for Updates…") { applicationDelegate.updater.checkForUpdates(nil) }
+                        Menu("Language") {
+                            ForEach(AppLanguage.allCases) { choice in
+                                Toggle(LocalizedStringKey(choice.title), isOn: Binding(
+                                    get: { LocalizationManager.shared.choice == choice },
+                                    set: { if $0 { LocalizationManager.shared.choice = choice } }))
+                            }
+                        }
                     }
                     CommandGroup(after: .toolbar) {
                         // With a dialog's preview open (Export JPEG), these zoom that preview rather than the canvas.
@@ -257,10 +267,10 @@ struct CompositorApp: App {
                     Button("Hue/Saturation…") { session.beginHueSaturation() }
                         .configuredKeyboardShortcut("u").disabled(!session.canAdjustColors)
                     ForEach([FilterKind.blackWhite, .colorBalance, .exposure, .gradientMap, .grain], id: \.self) { kind in
-                        Button("\(kind.rawValue)…") { session.beginFilter(kind) }
+                        Button(LocalizedStringKey(kind.rawValue + "…")) { session.beginFilter(kind) }
                             .disabled(!session.canAdjustColors || session.hueSaturation != nil)
                     }
-                    Button(session.isMaskSelected ? "Invert Mask" : "Invert") { Task { await session.invertPixels() } }
+                    Button(session.isMaskSelected ? LocalizedStringKey("Invert Mask") : LocalizedStringKey("Invert")) { Task { await session.invertPixels() } }
                         .configuredKeyboardShortcut("i")
                         .disabled(!session.canInvert)
                     Divider()
@@ -282,26 +292,26 @@ struct CompositorApp: App {
                 }
                 CommandMenu("Filter") {
                     ForEach(FilterKind.allCases.filter { $0 != .contentAwareFill && !$0.isImageAdjustment }, id: \.self) { kind in
-                        Button("\(kind.rawValue)…") { session.beginFilter(kind) }
+                        Button(LocalizedStringKey(kind.rawValue + "…")) { session.beginFilter(kind) }
                             .disabled(!(kind == .vignette ? session.canVignette : session.canAdjustColors) || session.hueSaturation != nil)
                     }
                 }
                 CommandMenu("Layer") {
                     Menu("New Adjustment Layer") {
                         ForEach(AdjustmentKind.allCases, id: \.self) { kind in
-                            Button(kind.rawValue + (kind.isEditable ? "…" : "")) { session.addAdjustment(kind) }
+                            Button(LocalizedStringKey(kind.rawValue + (kind.isEditable ? "…" : ""))) { session.addAdjustment(kind) }
                         }
                     }.disabled(!session.canEditLayers || session.document == nil)
                     Button("Edit Adjustment…") {
                         session.adjustmentEditingID = session.activeLayerID
                     }.disabled(!session.canEditLayers || session.activeLayer?.adjustment == nil)
                     Divider()
-                    Button(session.canTransformSelection ? "Transform Selection" : "Transform Layer") { session.transformCommand() }
+                    Button(session.canTransformSelection ? LocalizedStringKey("Transform Selection") : LocalizedStringKey("Transform Layer")) { session.transformCommand() }
                         .configuredKeyboardShortcut("t").disabled(!session.canTransform && !session.canTransformSelection)
-                    Button(session.selection == nil ? "Duplicate Layer" : "Layer via Copy") { session.layerViaCopy() }
+                    Button(session.selection == nil ? LocalizedStringKey("Duplicate Layer") : LocalizedStringKey("Layer via Copy")) { session.layerViaCopy() }
                         .configuredKeyboardShortcut("j").disabled(!session.canCopyPixels && !(session.selection == nil && session.canEditLayers && session.activeLayer != nil))
                     Divider()
-                    Button(session.activeLayer?.maskSourceID == nil ? "Create Clipping Mask" : "Release Clipping Mask") {
+                    Button(session.activeLayer?.maskSourceID == nil ? LocalizedStringKey("Create Clipping Mask") : LocalizedStringKey("Release Clipping Mask")) {
                         if let id = session.activeLayerID { session.toggleClippingMask(id) }
                     }
                     .configuredKeyboardShortcut("g", modifiers: [.command, .option])
@@ -317,7 +327,7 @@ struct CompositorApp: App {
                         .configuredKeyboardShortcut("n", modifiers: [.command, .shift]).disabled(!session.canEditLayers)
                     Button("Rename Layer…") { session.renamingLayerID = session.activeLayerID }
                         .disabled(!session.canEditLayers || session.activeLayer == nil)
-                    Button(session.activeLayer?.isVisible == false ? "Show Layer" : "Hide Layer") {
+                    Button(session.activeLayer?.isVisible == false ? LocalizedStringKey("Show Layer") : LocalizedStringKey("Hide Layer")) {
                         if let id = session.activeLayerID { session.toggleLayerVisibility(id) }
                     }.disabled(!session.canEditLayers || session.activeLayer == nil)
                     Divider()
@@ -326,7 +336,7 @@ struct CompositorApp: App {
                     Button("Move Layer Down") { session.moveActiveLayer(by: -1) }
                         .configuredKeyboardShortcut("[").disabled(!session.canMoveActiveLayer(by: -1))
                     Group {
-                        Button(session.mergeTitle) { session.mergeLayers() }
+                        Button(LocalizedStringKey(session.mergeTitle)) { session.mergeLayers() }
                             .configuredKeyboardShortcut("e").disabled(!session.canMergeLayers)
                         Divider()
                         Button("Flip Layer Horizontal") { session.flipLayers(horizontally: true) }
@@ -335,7 +345,7 @@ struct CompositorApp: App {
                             .disabled(!session.canTransform)
                     }
                     Divider()
-                    Button(session.selectedEffect != nil ? "Delete " + session.selectedEffect!.kind.rawValue : session.isMaskSelected && session.activeLayer?.mask != nil ? "Delete Layer Mask" : session.selectedLayerIDs.count > 1 ? "Delete Layers" : "Delete Layer") {
+                    Button(session.selectedEffect != nil ? LocalizationManager.shared.localized("Delete %@", session.selectedEffect!.kind.rawValue) : LocalizationManager.shared.localized(session.isMaskSelected && session.activeLayer?.mask != nil ? "Delete Layer Mask" : session.selectedLayerIDs.count > 1 ? "Delete Layers" : "Delete Layer")) {
                         session.deleteLayerOrMask()
                     }
                         .disabled(!session.canEditLayers || session.activeLayer == nil)

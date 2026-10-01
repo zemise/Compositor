@@ -39,7 +39,7 @@ struct ColorPaletteControls: View {
         .disabled(!session.canEditPalette)
         .popover(isPresented: Binding(get: { choosingMaskBackground != nil }, set: { if !$0 { choosingMaskBackground = nil } })) {
             VStack(alignment: .leading, spacing: 12) {
-                Text(choosingMaskBackground == true ? "Mask background" : "Mask foreground").font(.headline)
+                Text(choosingMaskBackground == true ? LocalizedStringKey("Mask background") : LocalizedStringKey("Mask foreground")).font(.headline)
                 HStack {
                     Button("Black · Hide") { chooseMask(.black) }
                     Button("White · Reveal") { chooseMask(.white) }
@@ -56,7 +56,7 @@ struct ColorPaletteControls: View {
         }
     }
     private func swatch(background: Bool) -> some View {
-        let label = background ? "Background color" : "Foreground color"
+        let label: LocalizedStringKey = background ? "Background color" : "Foreground color"
         let shape = RoundedRectangle(cornerRadius: 6, style: .continuous)
         return Button {
             if session.isMaskSelected { choosingMaskBackground = background }
@@ -69,7 +69,7 @@ struct ColorPaletteControls: View {
                 .frame(width: swatchSize, height: swatchSize)
                 .contentShape(shape)
         }
-        .buttonStyle(.plain).help(label).accessibilityLabel(label)
+        .buttonStyle(.plain).help(label).accessibilityLabel(Text(label))
     }
     private func chooseMask(_ color: PaletteColor) {
         guard let background = choosingMaskBackground else { return }
