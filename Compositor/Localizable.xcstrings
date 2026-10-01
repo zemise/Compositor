@@ -98,7 +98,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ 同时被指定给 %@ 和 %@。"
+            "value": "%@ 同时指派给了 %@ 和 %@。"
           }
         }
       }
@@ -149,7 +149,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "将选区%@这么多像素"
+            "value": "按此像素数%@选区"
           }
         }
       }
@@ -268,7 +268,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "再多 %lld 个标签页"
+            "value": "还有 %lld 个标签页"
           }
         }
       }
@@ -336,7 +336,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "再多 1 个标签页"
+            "value": "还有 1 个标签页"
           }
         }
       }
@@ -948,7 +948,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "调整图像的亮部。按住 Option 可查看被剪掉的高光。"
+            "value": "调整图像的亮部。按住 Option 可查看溢出的高光。"
           }
         }
       }
@@ -965,7 +965,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "调整图像的暗部。按住 Option 可查看被剪掉的阴影。"
+            "value": "调整图像的暗部。按住 Option 可查看溢出的阴影。"
           }
         }
       }
@@ -1135,7 +1135,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法保存某个图像。先前的项目尚未被替换。"
+            "value": "无法存储某个图像。先前的项目尚未被替换。"
           }
         }
       }
@@ -1191,6 +1191,23 @@
         }
       }
     },
+    "Angle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "角度"
+          }
+        }
+      }
+    },
     "Another app changed this project. You can revert to the version on disk, losing your unsaved changes, or keep what you have.": {
       "extractionState": "manual",
       "localizations": {
@@ -1203,7 +1220,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "另一个应用更改了此项目。您可以恢复到磁盘上的版本（将丢失未存储的更改），或保留当前内容。"
+            "value": "另一个应用更改了此项目。你可以恢复到磁盘上的版本（将丢失未存储的更改），或保留当前内容。"
           }
         }
       }
@@ -1323,6 +1340,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在应用…"
+          }
+        }
+      }
+    },
+    "Aquas": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquas"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浅绿色"
+          }
+        }
+      }
+    },
+    "Aspect": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aspect"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "比例"
           }
         }
       }
@@ -1476,6 +1527,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "“拼合”会将当前的蒙版外观保留到相关图层的像素中。“移除链接”会显示它们的像素。任一选择都可以撤销。"
+          }
+        }
+      }
+    },
+    "Balance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balance"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "平衡"
           }
         }
       }
@@ -1752,6 +1820,23 @@
         }
       }
     },
+    "Blending": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blending"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "混合"
+          }
+        }
+      }
+    },
     "Bloom": {
       "extractionState": "manual",
       "localizations": {
@@ -1781,7 +1866,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "发光 / 光晕"
+            "value": "泛光 / 光晕"
           }
         }
       }
@@ -1922,6 +2007,23 @@
         }
       }
     },
+    "Boost": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boost"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "增强"
+          }
+        }
+      }
+    },
     "Bottom": {
       "extractionState": "manual",
       "localizations": {
@@ -2036,7 +2138,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "提亮或压暗四角，以抵消镜头暗角。"
+            "value": "提亮或压暗四角，以抵消镜头晕影。"
           }
         }
       }
@@ -2053,7 +2155,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "以曝光级数提亮或压暗整幅图像。按住 Option 可查看被剪掉的高光。"
+            "value": "以曝光级数提亮或压暗整幅图像。按住 Option 可查看溢出的高光。"
           }
         }
       }
@@ -2070,7 +2172,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此轮盘所添加的亮度。"
+            "value": "此色轮添加的亮度。"
           }
         }
       }
@@ -2104,7 +2206,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "画笔 (B) · 橡皮擦 (E)"
+            "value": "画笔（B） · 橡皮擦（E）"
           }
         }
       }
@@ -2563,7 +2665,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "请选择 JPEG、PNG、HEIC、TIFF 或 Photoshop (PSD) 文件。"
+            "value": "请选择 JPEG、PNG、HEIC、TIFF 或 Photoshop（PSD）文件。"
           }
         }
       }
@@ -2665,7 +2767,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "选取暗角颜色"
+            "value": "选取晕影颜色"
           }
         }
       }
@@ -2700,6 +2802,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "选择下方校准滑块的应用强度。版本 6 是当前的默认值。"
+          }
+        }
+      }
+    },
+    "Clarity": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clarity"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清晰度"
           }
         }
       }
@@ -2784,7 +2903,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "清除使背景透过稀薄区域显现的雾霾"
+            "value": "清除使背景透过稀疏区域显现的薄雾"
           }
         }
       }
@@ -2801,7 +2920,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "提高时清除雾霾，降低时添加雾霾。"
+            "value": "提高时清除薄雾，降低时添加薄雾。"
           }
         }
       }
@@ -2852,7 +2971,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "单击一个快捷键，然后按下新的组合键。更改将在保存后生效。"
+            "value": "单击一个快捷键，然后按下新的组合键。更改将在存储后生效。"
           }
         }
       }
@@ -3090,7 +3209,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "单击图像以保存颜色。最多八种颜色。"
+            "value": "单击图像以存储颜色。最多八种颜色。"
           }
         }
       }
@@ -3175,7 +3294,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "剪贴到 %@"
+            "value": "剪切到 %@"
           }
         }
       }
@@ -3192,7 +3311,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "剪贴蒙版"
+            "value": "剪切蒙版"
           }
         }
       }
@@ -3209,7 +3328,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "基于 %@ 的剪贴蒙版。按住 Option 单击其所在行的底部可释放。"
+            "value": "基于 %@ 的剪切蒙版。按住 Option 单击其所在行的底部可释放。"
           }
         }
       }
@@ -3243,7 +3362,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "仿制图章 (S) · 按住 Option 单击设置源"
+            "value": "仿制图章（S） · 按住 Option 单击设置源"
           }
         }
       }
@@ -3702,7 +3821,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "颜色优先级"
+            "value": "颜色优先"
           }
         }
       }
@@ -3872,7 +3991,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Compositor 将转换这些 Photoshop 功能。在您继续之前不会应用任何更改。"
+            "value": "Compositor 将转换这些 Photoshop 功能。在你继续之前不会应用任何更改。"
           }
         }
       }
@@ -4416,7 +4535,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法保存项目"
+            "value": "无法存储项目"
           }
         }
       }
@@ -4433,7 +4552,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "无法裁剪图像"
+            "value": "无法修剪图像"
           }
         }
       }
@@ -4450,7 +4569,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "创建剪贴蒙版"
+            "value": "创建剪切蒙版"
           }
         }
       }
@@ -4518,7 +4637,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "创建剪贴蒙版"
+            "value": "创建剪切蒙版"
           }
         }
       }
@@ -4552,7 +4671,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "裁剪 (C)"
+            "value": "裁剪（C）"
           }
         }
       }
@@ -4880,6 +4999,23 @@
         }
       }
     },
+    "Darks": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Darks"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暗色调"
+          }
+        }
+      }
+    },
     "Dashed Lines": {
       "extractionState": "manual",
       "localizations": {
@@ -5062,7 +5198,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "去薄雾"
+            "value": "去除薄雾"
           }
         }
       }
@@ -5271,6 +5407,23 @@
         }
       }
     },
+    "Density": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Density"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "密度"
+          }
+        }
+      }
+    },
     "Deselect": {
       "extractionState": "manual",
       "localizations": {
@@ -5385,7 +5538,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "使此颜色范围之外的画面变暗。按“好”时不会保留。"
+            "value": "使此颜色范围之外的画面变暗。按“确定”时不会保留。"
           }
         }
       }
@@ -5420,6 +5573,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "停用蒙版"
+          }
+        }
+      }
+    },
+    "Distance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distance"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "距离"
           }
         }
       }
@@ -5471,6 +5641,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "变形图层"
+          }
+        }
+      }
+    },
+    "Distortion": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distortion"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扭曲"
           }
         }
       }
@@ -5912,7 +6099,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "拖动以移动 · 拖动手柄调整大小 · 拖动圆点旋转 · 1–0 图层不透明度 · 空格平移"
+            "value": "拖动以移动 · 拖动控制点调整大小 · 拖动圆点旋转 · 1–0 图层不透明度 · 空格平移"
           }
         }
       }
@@ -6286,7 +6473,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "拷贝图层"
+            "value": "复制图层"
           }
         }
       }
@@ -6303,7 +6490,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "拷贝像素"
+            "value": "复制像素"
           }
         }
       }
@@ -6932,7 +7119,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "英语"
+            "value": "English"
           }
         }
       }
@@ -7272,7 +7459,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "吸管 (I)"
+            "value": "吸管（I）"
           }
         }
       }
@@ -7306,7 +7493,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "按此像素数淡化选区边缘"
+            "value": "按此像素数羽化选区边缘"
           }
         }
       }
@@ -7833,7 +8020,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不支持文件夹混合模式“%@”。该文件夹将变为穿透。"
+            "value": "不支持文件夹混合模式“%@”。该文件夹将按穿透处理。"
           }
         }
       }
@@ -8008,6 +8195,23 @@
         }
       }
     },
+    "Gamma": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gamma"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "伽马"
+          }
+        }
+      }
+    },
     "Gaussian": {
       "extractionState": "manual",
       "localizations": {
@@ -8139,7 +8343,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "渐变 (G)"
+            "value": "渐变（G）"
           }
         }
       }
@@ -8598,7 +8802,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "光晕"
+            "value": "晕光"
           }
         }
       }
@@ -8666,7 +8870,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "抓手 (H)"
+            "value": "抓手（H）"
           }
         }
       }
@@ -8836,7 +9040,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "全部隐藏（黑）"
+            "value": "全部隐藏（黑色）"
           }
         }
       }
@@ -9108,7 +9312,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "高光优先保护明亮边缘。“颜色优先”还会减少颜色。“绘制叠加”均匀覆盖边缘。"
+            "value": "高光优先保护明亮边缘。颜色优先还会减少颜色。绘画叠加会均匀覆盖边缘。"
           }
         }
       }
@@ -9160,6 +9364,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "按住 Shift 添加或按住 Option 减去，以形成一个轮廓"
+          }
+        }
+      }
+    },
+    "Horizontal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horizontal"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "水平"
           }
         }
       }
@@ -10451,7 +10672,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "套索 (L)"
+            "value": "套索（L）"
           }
         }
       }
@@ -10949,6 +11170,40 @@
         }
       }
     },
+    "Lightness": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lightness"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明度"
+          }
+        }
+      }
+    },
+    "Lights": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lights"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "亮色调"
+          }
+        }
+      }
+    },
     "Limited to the selection": {
       "extractionState": "manual",
       "localizations": {
@@ -11080,7 +11335,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "线性减淡(添加)"
+            "value": "线性减淡（添加）"
           }
         }
       }
@@ -11267,7 +11522,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "液化推动像素 · 模糊柔化 · 涂抹拖移颜色"
+            "value": "液化推动像素 · 模糊柔化 · 涂抹拖动颜色"
           }
         }
       }
@@ -11369,7 +11624,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "锁定长宽比。拖动控制柄时按住 Shift 可反向变换。"
+            "value": "锁定长宽比。拖动控制点时按住 Shift 可反向变换。"
           }
         }
       }
@@ -11404,6 +11659,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "低"
+          }
+        }
+      }
+    },
+    "Luminance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luminance"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明亮度"
           }
         }
       }
@@ -11522,7 +11794,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "MacBook Pro 14\\\""
+            "value": "MacBook Pro 14\""
           }
         }
       }
@@ -11539,7 +11811,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "MacBook Pro 16\\\""
+            "value": "MacBook Pro 16\""
           }
         }
       }
@@ -11641,7 +11913,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "魔棒 (W) · Tab 在魔棒与对象选择之间切换"
+            "value": "魔棒（W） · Tab 在魔棒与对象选择之间切换"
           }
         }
       }
@@ -11896,7 +12168,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "选框 (M)"
+            "value": "选框（M）"
           }
         }
       }
@@ -11982,6 +12254,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "蒙版黑色区域"
+          }
+        }
+      }
+    },
+    "Masking": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masking"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "蒙版"
           }
         }
       }
@@ -12173,6 +12462,23 @@
         }
       }
     },
+    "Midpoint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Midpoint"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中点"
+          }
+        }
+      }
+    },
     "Midtones": {
       "extractionState": "manual",
       "localizations": {
@@ -12202,7 +12508,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "缺少源"
+            "value": "缺失的源"
           }
         }
       }
@@ -12321,7 +12627,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "移动 / 变换 (V)"
+            "value": "移动 / 变换（V）"
           }
         }
       }
@@ -13120,7 +13426,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "新建空白图层 (⇧⌘N)"
+            "value": "新建空白图层（⇧⌘N）"
           }
         }
       }
@@ -13154,7 +13460,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "新建画布 (⌘N)"
+            "value": "新建画布（⌘N）"
           }
         }
       }
@@ -13171,7 +13477,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "新建画布 (⌘N) · 将图像拖到此处可新建标签页"
+            "value": "新建画布（⌘N） · 将图像拖到此处可新建标签页"
           }
         }
       }
@@ -13256,7 +13562,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "裁剪后没有内容剩下。"
+            "value": "修剪后没有内容剩下。"
           }
         }
       }
@@ -13409,7 +13715,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "未选择任何内容，因此无处可绘画。请选择“选择”›“取消选择”(⌘D) 以便在任意位置绘画。"
+            "value": "未选择任何内容，因此无法绘画。请选择“选择”›“取消选择”（⌘D）以便在任意位置绘画。"
           }
         }
       }
@@ -13652,6 +13958,23 @@
         }
       }
     },
+    "Offset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offset"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "偏移"
+          }
+        }
+      }
+    },
     "Offset X": {
       "extractionState": "manual",
       "localizations": {
@@ -13766,7 +14089,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 0（连按两次输入精确百分比）"
+            "value": "不透明度数字 0（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -13783,7 +14106,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 1（连按两次输入精确百分比）"
+            "value": "不透明度数字 1（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -13800,7 +14123,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 2（连按两次输入精确百分比）"
+            "value": "不透明度数字 2（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -13817,7 +14140,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 3（连按两次输入精确百分比）"
+            "value": "不透明度数字 3（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -13834,7 +14157,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 4（连按两次输入精确百分比）"
+            "value": "不透明度数字 4（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -13851,7 +14174,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 5（连按两次输入精确百分比）"
+            "value": "不透明度数字 5（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -13868,7 +14191,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 6（连按两次输入精确百分比）"
+            "value": "不透明度数字 6（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -13885,7 +14208,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 7（连按两次输入精确百分比）"
+            "value": "不透明度数字 7（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -13902,7 +14225,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 8（连按两次输入精确百分比）"
+            "value": "不透明度数字 8（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -13919,7 +14242,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "不透明度数字 9（连按两次输入精确百分比）"
+            "value": "不透明度数字 9（输入两位数字以指定精确百分比）"
           }
         }
       }
@@ -14089,7 +14412,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在绘画工具中，按住 Option 会临时选择吸管。Shift 可约束形状/移动方向，或添加到选区；Option 从选区中减去，或从中心绘制。Command 拖移可移动选中的像素；Command-Option 拖移可复制它们。Option 拖移可复制图层/文件夹/效果；在图层边界处按住 Option 单击可切换剪贴蒙版。Command 单击缩览图可载入其选区。Control 可绕过吸附。右键拖移可调整画笔大小。修饰键与鼠标的手势是固定的。"
+            "value": "在绘画工具中，按住 Option 会临时选择吸管。Shift 可约束形状/移动方向，或添加到选区；Option 从选区中减去，或从中心绘制。Command 拖动可移动选中的像素；Command-Option 拖动可复制它们。Option 拖动可复制图层/文件夹/效果；在图层边界处按住 Option 单击可切换剪切蒙版。Command 单击缩览图可载入其选区。Control 可绕过吸附。右键拖动可调整画笔大小。修饰键与鼠标的手势是固定的。"
           }
         }
       }
@@ -14141,6 +14464,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "请先按住 Option 单击以设置仿制图章要拷贝的位置。"
+          }
+        }
+      }
+    },
+    "Oranges": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oranges"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "橙色"
           }
         }
       }
@@ -14412,7 +14752,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "使用前景色绘画 (B)，或将像素擦除 (E)"
+            "value": "使用前景色绘画（B），或将像素擦除（E）"
           }
         }
       }
@@ -15058,7 +15398,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在应用暗角时保护明亮的像素。用于高光优先。"
+            "value": "在应用深色晕影时保护明亮的像素。用于高光优先。"
           }
         }
       }
@@ -15144,6 +15484,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "紫色色相"
+          }
+        }
+      }
+    },
+    "Purples": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purples"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "紫色"
           }
         }
       }
@@ -15330,7 +15687,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "仅从现用图层读取颜色，或从所有可见图层的显示效果读取颜色"
+            "value": "仅从当前图层读取颜色，或从所有可见图层的显示效果读取颜色"
           }
         }
       }
@@ -15573,6 +15930,23 @@
         }
       }
     },
+    "Refine": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refine"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "精炼"
+          }
+        }
+      }
+    },
     "Refine Saturation": {
       "extractionState": "manual",
       "localizations": {
@@ -15619,7 +15993,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "释放剪贴蒙版"
+            "value": "释放剪切蒙版"
           }
         }
       }
@@ -15636,7 +16010,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "释放剪贴蒙版"
+            "value": "释放剪切蒙版"
           }
         }
       }
@@ -15721,7 +16095,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "移出色差"
+            "value": "移除色差"
           }
         }
       }
@@ -16270,6 +16644,23 @@
         }
       }
     },
+    "Roughness": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roughness"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粗糙度"
+          }
+        }
+      }
+    },
     "Round the rectangle's corners by this many pixels; 0 keeps them square": {
       "extractionState": "manual",
       "localizations": {
@@ -16283,6 +16674,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "按此像素值圆化矩形的角；0 保持直角"
+          }
+        }
+      }
+    },
+    "Roundness": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roundness"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "圆度"
           }
         }
       }
@@ -17047,7 +17455,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "形状 (U) · Shift-U 在矩形与椭圆之间切换"
+            "value": "形状（U） · Shift-U 在矩形与椭圆之间切换"
           }
         }
       }
@@ -17217,7 +17625,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "将光晕从冷色移向暖色。光晕残留保持红色。在提高光晕之前没有效果。"
+            "value": "将光晕从冷色移向暖色。晕光保持红色。在提高光晕之前没有效果。"
           }
         }
       }
@@ -17659,7 +18067,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "显示变换框和控制点（⌘H）。隐藏时，可在任意位置拖移以移动图层。"
+            "value": "显示变换框和控制点（⌘H）。隐藏时，可在任意位置拖动以移动图层。"
           }
         }
       }
@@ -17744,7 +18152,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "涂抹 (R)"
+            "value": "涂抹（R）"
           }
         }
       }
@@ -17965,7 +18373,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "部分拖入的项目无法读取。请从访达拖入 JPEG、PNG、HEIC、TIFF 或 Photoshop (PSD) 文件。"
+            "value": "部分拖入的项目无法读取。请从访达拖入 JPEG、PNG、HEIC、TIFF 或 Photoshop（PSD）文件。"
           }
         }
       }
@@ -17999,7 +18407,24 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "污点修复画笔 (J)"
+            "value": "污点修复画笔（J）"
+          }
+        }
+      }
+    },
+    "Spread": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spread"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扩散"
           }
         }
       }
@@ -18509,7 +18934,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "目标调整：在图像上拖移以更改该颜色的饱和度，按住 Command 可更改色相"
+            "value": "目标调整：在图像上拖动以更改该颜色的饱和度，按住 Command 可更改色相"
           }
         }
       }
@@ -18611,7 +19036,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "文本栏保留标准 macOS 编辑按键。对话框共享上文的“应用/取消”分配。数字栏使用上/下方向键，按住 Shift 可加大步长。标准 macOS 命令包括 ⌘Q 退出和 ⌃⌘F 全屏。快捷键编辑器本身始终使用 Return 保存、Esc 取消（未录制时）。"
+            "value": "文本栏保留标准 macOS 编辑按键。对话框共享上文的“应用/取消”分配。数字栏使用上/下方向键，按住 Shift 可加大步长。标准 macOS 命令包括 ⌘Q 退出和 ⌃⌘F 全屏。快捷键编辑器本身始终使用 Return 存储、Esc 取消（未录制时）。"
           }
         }
       }
@@ -18646,6 +19071,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "文本编辑快捷键需要 Command、Option 或 Control，以免替换正常输入。"
+          }
+        }
+      }
+    },
+    "Texture": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texture"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "纹理"
           }
         }
       }
@@ -18985,7 +19427,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "裁剪后的图像尺寸无效。"
+            "value": "修剪后的图像尺寸无效。"
           }
         }
       }
@@ -19121,7 +19563,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此剪贴蒙版的基底不受支持，已跳过剪贴。"
+            "value": "此剪切蒙版的基底不受支持，已跳过剪切。"
           }
         }
       }
@@ -19274,7 +19716,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "切换剪贴蒙版"
+            "value": "切换剪切蒙版"
           }
         }
       }
@@ -19343,6 +19785,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "色调对比度…"
+          }
+        }
+      }
+    },
+    "Tones": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tones"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "色调"
           }
         }
       }
@@ -19682,7 +20141,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "裁切"
+            "value": "修剪掉"
           }
         }
       }
@@ -19750,7 +20209,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "文字 (T)"
+            "value": "文字（T）"
           }
         }
       }
@@ -20197,6 +20656,23 @@
         }
       }
     },
+    "Vertical": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vertical"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "垂直"
+          }
+        }
+      }
+    },
     "Vertical ruler": {
       "extractionState": "manual",
       "localizations": {
@@ -20210,6 +20686,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "垂直标尺"
+          }
+        }
+      }
+    },
+    "Vibrance": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vibrance"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鲜艳度"
           }
         }
       }
@@ -20244,6 +20737,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "晕影…"
+          }
+        }
+      }
+    },
+    "Vignetting": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vignetting"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "晕影"
           }
         }
       }
@@ -20312,6 +20822,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "魔棒"
+          }
+        }
+      }
+    },
+    "Warmth": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warmth"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暖色"
           }
         }
       }
@@ -20452,6 +20979,23 @@
         }
       }
     },
+    "Wobble": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wobble"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "抖动"
+          }
+        }
+      }
+    },
     "Working…": {
       "extractionState": "manual",
       "localizations": {
@@ -20532,7 +21076,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "黄色颜色"
+            "value": "黄色"
           }
         }
       }
@@ -20566,7 +21110,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "如果不存储，您的更改将会丢失。"
+            "value": "如果不存储，你的更改将会丢失。"
           }
         }
       }
@@ -20600,7 +21144,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "缩放 (Z)"
+            "value": "缩放（Z）"
           }
         }
       }

@@ -335,6 +335,279 @@ def audit_display_literals(strings):
     return unique
 
 
+# --- Helper-passed display strings. -----------------------------------------------------
+#
+# A helper such as `control(_ title: String, …)` that builds `Text(LocalizedStringKey(title))`
+# turns every literal its callers pass for `title` into a catalog key. Direct display-call scanning
+# never sees those literals, because they are arguments to the helper, not to `Text`. A parameter
+# counts as localized when it is used as an explicit key — `LocalizedStringKey(p)`,
+# `localizedString(p)`, `localizedFormat(p)`, `.localized(p)` — or, when the parameter's own type is
+# `LocalizedStringKey`, through `Text(p)`, `Label(p)`, `.help(p)`, `.accessibilityLabel(p)`; or when
+# it is passed onward to another such helper. The same holds for a `String` stored property of a
+# view struct (CameraRawSlider's `help`, TransformValueField's `label`) and its memberwise-init
+# labels.
+
+KEY_POSITIONS = [
+    r"\bLocalizedStringKey\(\s*%s\b",
+    r"\blocalizedString\(\s*%s\b",
+    r"\blocalizedFormat\(\s*%s\b",
+    r"\.localized\(\s*%s\b",
+]
+VIEW_POSITIONS = [
+    r"\bText(?:Field)?\(\s*%s\b",
+    r"\bLabel\(\s*%s\b",
+    r"\.help\(\s*%s\b",
+    r"\.accessibilityLabel\(\s*%s\b",
+]
+STRING_TYPE = re.compile(r"^\s*(?:\w+\.)?(?:String|LocalizedStringKey)\s*\??\s*$")
+KEY_TYPE = re.compile(r"^\s*(?:\w+\.)?LocalizedStringKey\s*\??\s*$")
+FUNC_DECL = re.compile(r"\bfunc\s+([A-Za-z_]\w*)\s*(?:<[^>]*>)?\s*\(")
+STRUCT_DECL = re.compile(r"\bstruct\s+([A-Za-z_]\w*)\s*(?:<[^>]*>)?\s*[:{]")
+STRING_PROP = re.compile(r"(?:var|let)\s+(\w+)\s*:\s*((?:String|LocalizedStringKey)\??)\s*(?:=|\n|$)")
+
+
+def source_without_literals(text, literals):
+    """`text` with every literal and comment blanked, so brackets can be matched structurally."""
+    chars = list(text)
+    for literal in literals:
+        for index in range(literal["start"], literal["end"]):
+            if chars[index] != "\n":
+                chars[index] = " "
+    for pattern in (r"//[^\n]*", r"/\*.*?\*/"):
+        for match in re.finditer(pattern, text, re.S):
+            for index in range(match.start(), match.end()):
+                if chars[index] != "\n":
+                    chars[index] = " "
+    return "".join(chars)
+
+
+def closing_index(masked, open_index):
+    """The index of the bracket matching the one at `open_index`, or -1."""
+    depth, index, size = 0, open_index, len(masked)
+    while index < size:
+        char = masked[index]
+        if char in "([{":
+            depth += 1
+        elif char in ")]}":
+            depth -= 1
+            if depth == 0:
+                return index
+        index += 1
+    return -1
+
+
+def split_top_level(masked, start, end):
+    """[start, end) split on top-level commas, as (start, end) pairs."""
+    parts, depth, begin, index = [], 0, start, start
+    while index < end:
+        char = masked[index]
+        if char in "([{":
+            depth += 1
+        elif char in ")]}":
+            depth -= 1
+        elif char == "," and depth == 0:
+            parts.append((begin, index))
+            begin = index + 1
+        index += 1
+    parts.append((begin, end))
+    return parts
+
+
+def declared_parameters(masked, open_index, close_index):
+    """(external label, name, type, span start) for each parameter of a declaration's paren list."""
+    out = []
+    if not masked[open_index + 1:close_index].strip():
+        return out
+    for start, end in split_top_level(masked, open_index + 1, close_index):
+        depth, colon = 0, -1
+        for index in range(start, end):
+            char = masked[index]
+            if char in "([{":
+                depth += 1
+            elif char in ")]}":
+                depth -= 1
+            elif char == ":" and depth == 0:
+                colon = index
+                break
+        if colon == -1:
+            continue
+        tokens = masked[start:colon].strip().split()
+        if len(tokens) == 1:
+            external, name = tokens[0], tokens[0]
+        elif len(tokens) >= 2:
+            external, name = tokens[0], tokens[1]
+        else:
+            continue
+        kind = masked[colon + 1:end].split("=")[0].strip()
+        out.append((external, name, kind, start))
+    return out
+
+
+def localized_tags(body, name, kind):
+    """How `name` reaches a displayed string inside `body`, given its declared type."""
+    pattern = re.escape(name)
+    tags = [tag for tag, text in zip(("key", "localizedString", "localizedFormat", ".localized"),
+                                     KEY_POSITIONS) if re.search(text % pattern, body)]
+    if KEY_TYPE.match(kind):
+        tags += [tag for tag, text in zip(("Text", "Label", ".help", ".a11y"), VIEW_POSITIONS)
+                 if re.search(text % pattern, body)]
+    return tags
+
+
+def helper_localized_keys(files, texts, masks):
+    """Map each helper name to the argument keys ('pos' index or 'label' name) it localizes."""
+    func_keys, func_decls, struct_keys = {}, {}, {}
+    for path in files:
+        masked, body_of = masks[path], texts[path]
+        for match in FUNC_DECL.finditer(masked):
+            name = match.group(1)
+            paren = masked.find("(", match.start())
+            close = closing_index(masked, paren)
+            if close == -1:
+                continue
+            brace = masked.find("{", close)
+            if brace == -1:
+                continue
+            body_end = closing_index(masked, brace)
+            if body_end == -1:
+                continue
+            params = declared_parameters(masked, paren, close)
+            if not params:
+                continue
+            body = body_of[brace:body_end]
+            func_decls.setdefault(name, []).append((params, body))
+            keys = set()
+            for external, param, kind, start in params:
+                if not STRING_TYPE.match(kind):
+                    continue
+                if localized_tags(body, param, kind):
+                    if external == "_":
+                        index = sum(1 for (e, _n, _k, p) in params if e == "_" and p < start)
+                        keys.add(("pos", index))
+                    else:
+                        keys.add(("label", external))
+            if keys:
+                func_keys.setdefault(name, set()).update(keys)
+        for match in STRUCT_DECL.finditer(masked):
+            name = match.group(1)
+            brace = masked.find("{", match.start())
+            body_end = closing_index(masked, brace)
+            if body_end == -1:
+                continue
+            body = body_of[brace:body_end]
+            keys = {prop for prop, kind in STRING_PROP.findall(body)
+                    if STRING_TYPE.match(kind) and localized_tags(body, prop, kind)}
+            if keys:
+                struct_keys.setdefault(name, set()).update(keys)
+
+    known = set(func_keys) | set(struct_keys)
+
+    def call_keys(name):
+        keys = set(func_keys.get(name, ()))
+        keys |= {("label", prop) for prop in struct_keys.get(name, ())}
+        return keys
+
+    # Onward passing: a parameter handed to another helper's localized key is localized too.
+    for _ in range(8):
+        changed = False
+        for name, decls in func_decls.items():
+            for params, body in decls:
+                for external, param, kind, start in params:
+                    if not STRING_TYPE.match(kind):
+                        continue
+                    key = (("pos", sum(1 for (e, _n, _k, p) in params if e == "_" and p < start))
+                           if external == "_" else ("label", external))
+                    if key in func_keys.get(name, ()):
+                        continue
+                    for call in re.finditer(r"\b([A-Za-z_]\w*)\s*\(", body):
+                        if call.group(1) not in known:
+                            continue
+                        keys = call_keys(call.group(1))
+                        open_index = body.find("(", call.start())
+                        close_index = closing_index(body, open_index)
+                        if close_index == -1:
+                            continue
+                        labeled, positional = {}, []
+                        for s, e in split_top_level(body, open_index + 1, close_index):
+                            argument = body[s:e].strip()
+                            label = re.match(r"([A-Za-z_]\w*)\s*:\s", argument)
+                            if label:
+                                labeled[label.group(1)] = argument
+                            else:
+                                positional.append(argument)
+                        if (("label", external) in keys and param in labeled.values()) or \
+                           any(("pos", i) in keys and argument == param for i, argument in enumerate(positional)):
+                            func_keys.setdefault(name, set()).add(key)
+                            changed = True
+                            break
+        if not changed:
+            break
+    return func_keys, struct_keys
+
+
+def audit_helper_literals(strings):
+    """Every literal passed to a helper's localized parameter that has no catalog key."""
+    catalog = {normalize_key(key) for key in strings}
+    files = sorted(swift_files())
+    texts, masks, literals = {}, {}, {}
+    for path in files:
+        with open(path, encoding="utf-8") as handle:
+            text = handle.read()
+        texts[path] = text
+        literals[path] = scan_literals(text)
+        masks[path] = source_without_literals(text, literals[path])
+    func_keys, struct_keys = helper_localized_keys(files, texts, masks)
+
+    def call_keys(name):
+        keys = set(func_keys.get(name, ()))
+        keys |= {("label", prop) for prop in struct_keys.get(name, ())}
+        return keys
+
+    candidates = []
+    for path in files:
+        text, masked, spans = texts[path], masks[path], literals[path]
+        for name in set(func_keys) | set(struct_keys):
+            keys = call_keys(name)
+            for call in re.finditer(r"\b%s\s*\(" % re.escape(name), masked):
+                if re.search(r"\bfunc\s*$", masked[max(0, call.start() - 8):call.start()]):
+                    continue
+                open_index = masked.find("(", call.start())
+                close_index = closing_index(masked, open_index)
+                if close_index == -1:
+                    continue
+                labeled, positional = {}, []
+                for s, e in split_top_level(masked, open_index + 1, close_index):
+                    label = re.match(r"\s*([A-Za-z_]\w*)\s*:\s", masked[s:e])
+                    if label:
+                        labeled[label.group(1)] = (s, e)
+                    else:
+                        positional.append((s, e))
+                for key in keys:
+                    if key[0] == "pos":
+                        if key[1] >= len(positional):
+                            continue
+                        s, e = positional[key[1]]
+                    elif key[1] in labeled:
+                        s, e = labeled[key[1]]
+                    else:
+                        continue
+                    for literal in spans:
+                        if literal["start"] < s or literal["end"] > e or literal["multiline"]:
+                            continue
+                        body = literal["body"]
+                        if normalize_key(body) in catalog or not is_translatable(body):
+                            continue
+                        line = text.count("\n", 0, literal["start"]) + 1
+                        candidates.append((os.path.relpath(path, REPO), line, name, body))
+    seen, unique = set(), []
+    for row in candidates:
+        if row in seen:
+            continue
+        seen.add(row)
+        unique.append(row)
+    return sorted(unique)
+
+
 def audit_double_localization():
     hits = []
     for path in sorted(swift_files()):
@@ -407,7 +680,15 @@ def main():
         print("      %s:%d  %s  %r" % (path, number, call, body))
     print()
 
-    outstanding = len(missing) + len(problems) + len(doubles) + len(chinese) + len(literals)
+    helpers = audit_helper_literals(strings)
+    print("Unlocalized helper-passed literals (helpers that localize a String parameter)")
+    print("  remaining       :", len(helpers))
+    for path, number, name, body in helpers:
+        print("      %s:%d  %s(...)  %r" % (path, number, name, body))
+    print()
+
+    outstanding = (len(missing) + len(problems) + len(doubles) + len(chinese)
+                   + len(literals) + len(helpers))
     print("Outstanding:", outstanding)
     return 1 if outstanding else 0
 

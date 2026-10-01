@@ -307,7 +307,7 @@ struct FilterSheet: View {
                             range: range)
             if let track {
                 CameraRawSlider(value: settings[keyPath: key], range: range, track: track,
-                                help: "\(title). Double-click to reset.",
+                                help: LocalizationManager.shared.localized("%@. Double-click to reset.", LocalizationManager.shared.localized(title)),
                                 onChange: { value in update { $0[keyPath: key] = (value * step).rounded() / step } },
                                 onReset: reset)
             } else {
@@ -361,8 +361,8 @@ struct GradientMapControls: View {
                     .contentShape(shape)
             }
             .buttonStyle(.plain)
-            .help("Choose the \(title.lowercased()) color")
-            .accessibilityLabel("\(title) color")
+            .help("Choose the \(LocalizationManager.shared.localized(title).lowercased()) color")
+            .accessibilityLabel("\(LocalizationManager.shared.localized(title)) color")
             Text(LocalizedStringKey(title))
         }
     }
