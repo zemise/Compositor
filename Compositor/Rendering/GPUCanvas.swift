@@ -11,7 +11,11 @@ import QuartzCore
 /// row is its row 0, and the frame's row 0 is the top of the view. Blending happens in sRGB, not linear light, as it
 /// does on the canvas and in Photoshop.
 @MainActor final class GPUCanvasRenderer {
-    static let shared: GPUCanvasRenderer? = GPUCanvasRenderer()
+    // Its textures are shared directly with CPU pixel buffers. Discrete GPUs use the established Core Graphics path.
+    static let shared: GPUCanvasRenderer? = {
+        guard MTLCreateSystemDefaultDevice()?.hasUnifiedMemory == true else { return nil }
+        return GPUCanvasRenderer()
+    }()
 
     let device: MTLDevice
     let queue: MTLCommandQueue
@@ -168,6 +172,7 @@ import QuartzCore
     /// place by the GPU, in order with everything else it does to that texture. Written straight into the texture's
     /// memory instead, a tile isn't seen on every GPU — a virtual machine's keeps its own copy, and parts of the texture
     /// came out empty.
+    @MainActor
     private final class TileWrites {
         let renderer: GPUCanvasRenderer
         let texture: MTLTexture

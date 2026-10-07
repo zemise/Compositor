@@ -131,7 +131,7 @@ struct GuideDrag: Equatable {
 extension EditorSession {
     /// Cyan, as Photoshop's default guide color.
     static let guideColor = CGColor(srgbRed: 0, green: 1, blue: 1, alpha: 0.9)
-    static let guideHitDistance: CGFloat = 5
+    nonisolated static let guideHitDistance: CGFloat = 5
 
     var canClearGuides: Bool { document.map { !$0.guides.isEmpty } ?? false }
     var canEditGuides: Bool {

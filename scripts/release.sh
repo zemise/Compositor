@@ -41,6 +41,7 @@ xcodebuild -exportArchive -quiet \
   -exportPath "$WORK/export"
 APP_PATH="$WORK/export/$APP.app"
 codesign --verify --deep --strict --verbose=2 "$APP_PATH"
+lipo -verify_arch arm64 x86_64 "$APP_PATH/Contents/MacOS/$APP"
 
 echo "==> Notarizing the app"
 ditto -c -k --keepParent "$APP_PATH" "$WORK/$APP.zip"

@@ -79,16 +79,22 @@ brew install --cask robbietilton-compositor
 
 ## Requirements
 
-- macOS 26.0 or later on a Mac with Apple silicon
-- Xcode 26 or later (to build from source)
+- macOS 15.0 or later on a Mac with Apple silicon or an Intel Mac
+- Xcode 16.4 or later (to build from source)
 
 ## Building
 
-Open `Compositor.xcodeproj` and run the **Compositor** scheme.
+Open `Compositor.xcodeproj` and run the **Compositor** scheme, or build it from the command line:
+
+```sh
+xcodebuild -project Compositor.xcodeproj -scheme Compositor -destination 'platform=macOS' build
+```
+
+Release builds are Universal 2 applications containing both `arm64` and `x86_64` code. On Macs without unified memory, Compositor automatically uses its Core Graphics canvas renderer instead of the unified-memory Metal path.
 
 ## Releasing
 
-`scripts/release.sh` builds a Release version, signs it with Developer ID, notarizes and staples it, and packages it into `dist/Compositor-<version>.dmg`.
+`scripts/release.sh` builds a Universal 2 Release version, verifies both architectures, signs it with Developer ID, notarizes and staples it, and packages it into `dist/Compositor-<version>.dmg`.
 
 It needs, all kept outside this repository:
 
