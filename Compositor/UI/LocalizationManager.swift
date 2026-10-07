@@ -33,8 +33,8 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 final class LocalizationManager {
     static let shared = LocalizationManager()
 
-    static let storageKey = "appLanguage.v1"
-    static let supportedLanguages = ["en", "zh-Hans"]
+    nonisolated static let storageKey = "appLanguage.v1"
+    nonisolated static let supportedLanguages = ["en", "zh-Hans"]
 
     var choice: AppLanguage {
         didSet {
