@@ -49,31 +49,45 @@ jobs:
           ONLY_ACTIVE_ARCH=NO
           CODE_SIGN_IDENTITY=-
 
-      - name: Verify and package DMG
+      - name: Verify app architectures and signature
         run: |
           set -euo pipefail
           app='DerivedData/Build/Products/Release/Compositor.app'
           executable="$app/Contents/MacOS/Compositor"
           test -d "$app"
           lipo -verify_arch arm64 x86_64 "$executable"
+          codesign --force --deep --sign - --preserve-metadata=identifier,entitlements,flags,runtime "$app"
           codesign --verify --deep --strict --verbose=2 "$app"
 
+      - name: Package installers
+        run: |
+          set -euo pipefail
+          app='DerivedData/Build/Products/Release/Compositor.app'
           mkdir -p dist stage
+          ditto -c -k --keepParent "$app" dist/Compositor.zip
           ditto "$app" stage/Compositor.app
           ln -s /Applications stage/Applications
-          hdiutil create -volname Compositor -srcfolder stage -ov -format UDZO "dist/Compositor.dmg"
-          (cd dist && shasum -a 256 Compositor.dmg > SHA256SUMS.txt)
+          if ! hdiutil create -quiet -fs HFS+ -volname Compositor -srcfolder stage -ov -format UDZO dist/Compositor.dmg; then
+            echo '::warning::DMG creation is unavailable on this runner; publishing the ZIP installer instead.'
+          fi
+          (cd dist && shasum -a 256 Compositor.zip > SHA256SUMS.txt)
+          if [[ -f dist/Compositor.dmg ]]; then
+            (cd dist && shasum -a 256 Compositor.dmg >> SHA256SUMS.txt)
+          fi
 
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
-            dist/Compositor.dmg dist/SHA256SUMS.txt \
+            dist/Compositor.zip dist/SHA256SUMS.txt \
             --repo "$GITHUB_REPOSITORY" \
             --title "Compositor $VERSION" \
             --generate-notes \
             --notes "Universal 2 installer for Apple silicon and Intel Macs. This community build is ad-hoc signed and is not Apple-notarized; on first launch, use Control-click → Open if macOS blocks it."
+          if [[ -f dist/Compositor.dmg ]]; then
+            gh release upload "$GITHUB_REF_NAME" dist/Compositor.dmg --repo "$GITHUB_REPOSITORY"
+          fi
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v7
@@ -81,5 +95,6 @@ jobs:
           name: Compositor-${{ env.VERSION }}
           path: |
             dist/Compositor.dmg
+            dist/Compositor.zip
             dist/SHA256SUMS.txt
           if-no-files-found: error
