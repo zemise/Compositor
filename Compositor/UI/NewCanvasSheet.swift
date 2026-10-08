@@ -73,8 +73,11 @@ struct NewCanvasSheet: View {
     private var pixelHeight: Int? { unit.pixels(height, resolution: resolution) }
     private var valid: Bool { pixelWidth != nil && pixelHeight != nil }
     private var resolutionHelp: String {
-        let size = unit != .pixels ? pixelWidth.flatMap { w in pixelHeight.map { h in " · \(Int(resolution)) DPI: \(w) × \(h) pixels" } } : nil
-        return "Resolution: 72 for screens, 300 for print. Click to switch." + (size ?? "")
+        let summary = LocalizationManager.shared.localized("Resolution: 72 for screens, 300 for print. Click to switch.")
+        let size = unit != .pixels ? pixelWidth.flatMap { w in pixelHeight.map { h in
+            LocalizationManager.shared.localized(" · %lld DPI: %lld × %lld pixels", Int(resolution), w, h)
+        } } : nil
+        return summary + (size ?? "")
     }
     /// Shows the sizes in another unit, the same canvas written differently.
     private func switchUnit(to new: NewCanvasUnit) {
@@ -101,7 +104,7 @@ struct NewCanvasSheet: View {
                             Text("Custom").tag(CanvasPreset?.none)
                             ForEach(CanvasPreset.groups.indices, id: \.self) { group in
                                 Divider()
-                                ForEach(CanvasPreset.groups[group]) { Text($0.title).tag(CanvasPreset?.some($0)) }
+                                ForEach(CanvasPreset.groups[group]) { Text(LocalizedStringKey($0.title)).tag(CanvasPreset?.some($0)) }
                             }
                         }
                         .pickerStyle(.inline).labelsHidden()
@@ -128,12 +131,12 @@ struct NewCanvasSheet: View {
             }
             // The settings are pills, each changed the same way: click to step to the next choice.
             HStack(spacing: 4) {
-                CyclePill(background.title, help: "Start see-through, or with a white or black Background layer. Click to switch.") {
+                CyclePill(background.title, help: LocalizationManager.shared.localized("Start see-through, or with a white or black Background layer. Click to switch.")) {
                     background = background.next
                 }
                 .accessibilityIdentifier("canvasBackground")
                 Text("·")
-                CyclePill(unit.name, help: "Units: pixels, inches, centimeters or millimeters. Click to switch.") {
+                CyclePill(unit.name, help: LocalizationManager.shared.localized("Units: pixels, inches, centimeters or millimeters. Click to switch.")) {
                     switchUnit(to: unit.next)
                 }
                 .accessibilityIdentifier("canvasUnit")
@@ -223,7 +226,7 @@ private struct CyclePill: View {
     init(_ title: String, help: String, action: @escaping () -> Void) { self.title = title; self.help = help; self.action = action }
     var body: some View {
         Button(action: action) {
-            Text(title).foregroundStyle(.secondary).monospacedDigit()
+            Text(LocalizedStringKey(title)).foregroundStyle(.secondary).monospacedDigit()
                 .padding(.horizontal, 6).padding(.vertical, 2)
                 .background(.quaternary.opacity(hovering ? 1 : 0), in: Capsule())
                 .contentShape(Capsule())

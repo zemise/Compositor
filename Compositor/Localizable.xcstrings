@@ -21523,6 +21523,176 @@
         }
       }
     },
+    "Add layer effect": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add layer effect"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加图层效果"
+          }
+        }
+      }
+    },
+    "Black canvas": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Black canvas"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "黑色画布"
+          }
+        }
+      }
+    },
+    "Enter a size up to %@ pixels at this DPI.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter a size up to %@ pixels at this DPI."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在此 DPI 下输入不超过 %@ 像素的尺寸。"
+          }
+        }
+      }
+    },
+    "Millimeters": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Millimeters"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毫米"
+          }
+        }
+      }
+    },
+    "Resolution: 72 for screens, 300 for print. Click to switch.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resolution: 72 for screens, 300 for print. Click to switch."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分辨率：屏幕使用 72，打印使用 300。点击切换。"
+          }
+        }
+      }
+    },
+    "Start see-through, or with a white or black Background layer. Click to switch.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start see-through, or with a white or black Background layer. Click to switch."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从透明开始，或创建白色或黑色背景图层。点击切换。"
+          }
+        }
+      }
+    },
+    "Transparent canvas": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transparent canvas"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "透明画布"
+          }
+        }
+      }
+    },
+    "Units: pixels, inches, centimeters or millimeters. Click to switch.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Units: pixels, inches, centimeters or millimeters. Click to switch."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "单位：像素、英寸、厘米或毫米。点击切换。"
+          }
+        }
+      }
+    },
+    "White canvas": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "White canvas"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "白色画布"
+          }
+        }
+      }
+    },
+    " · %lld DPI: %lld × %lld pixels": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " · %lld DPI: %lld × %lld pixels"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " · %lld DPI：%lld × %lld 像素"
+          }
+        }
+      }
+    },
     "简体中文": {
       "extractionState": "manual",
       "localizations": {
