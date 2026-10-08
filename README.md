@@ -96,6 +96,10 @@ Release builds are Universal 2 applications containing both `arm64` and `x86_64`
 
 `scripts/release.sh` builds a Universal 2 Release version, verifies both architectures, signs it with Developer ID, notarizes and staples it, and packages it into `dist/Compositor-<version>.dmg`.
 
+For a GitHub-hosted community build, push a version tag matching `MARKETING_VERSION` (for example,
+`v1.4.6`). The Release workflow builds a Universal 2 DMG, publishes it to GitHub Releases, and
+attaches a SHA-256 checksum. This automated package is ad-hoc signed rather than Apple-notarized.
+
 It needs, all kept outside this repository:
 
 - a **Developer ID Application** certificate in the login keychain
