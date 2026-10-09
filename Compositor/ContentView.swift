@@ -181,28 +181,29 @@ struct ContentView: View {
                     .modifier(NewProjectDropTarget(workspace: applicationDelegate?.workspace))
             }
 #if compiler(>=6.2)
-                if #available(macOS 26.0, *) {
             if #available(macOS 26.0, *) {
                 ToolbarSpacer(.fixed, placement: .navigation)
             } else {
-                    ToolbarItem(placement: .navigation) { Spacer().frame(width: 8) }
-            }
-                } else {
                 ToolbarItem(placement: .navigation) { Spacer().frame(width: 8) }
-                }
+            }
 #else
             ToolbarItem(placement: .navigation) { Spacer().frame(width: 8) }
 #endif
             if let workspace = applicationDelegate?.workspace {
 #if compiler(>=6.2)
-                ToolbarItem(placement: .navigation) {
-                    ProjectTabStrip(workspace: workspace)
-                        // As wide as the toolbar allows: the window less the traffic lights and New button before it
-                        // and the zoom controls after it. Bounded, so adding tabs never pushes those aside; the
-                        // strip scrolls instead.
-                        .frame(width: max(200, windowWidth - 352), height: 34, alignment: .center)
+                if #available(macOS 26.0, *) {
+                    ToolbarItem(placement: .navigation) {
+                        ProjectTabStrip(workspace: workspace)
+                            // Keep tabs bounded so they never push the primary actions aside.
+                            .frame(width: max(200, windowWidth - 352), height: 34, alignment: .center)
+                    }
+                    .sharedBackgroundVisibility(.hidden)
+                } else {
+                    ToolbarItem(placement: .navigation) {
+                        ProjectTabStrip(workspace: workspace)
+                            .frame(width: max(200, windowWidth - 352), height: 34, alignment: .center)
+                    }
                 }
-                .sharedBackgroundVisibility(.hidden)
 #else
                 ToolbarItem(placement: .navigation) {
                     ProjectTabStrip(workspace: workspace)
