@@ -107,8 +107,9 @@ For a GitHub-hosted community build, push a version tag matching `MARKETING_VERS
 creation, a DMG; it publishes the installers and SHA-256 checksums to GitHub Releases. These
 automated packages are ad-hoc signed rather than Apple-notarized. Hardened Runtime is disabled
 only for these community builds because ad-hoc signatures have no Team ID for Sparkle library
-validation. Developer ID releases keep Hardened Runtime enabled. Both Intel and Apple silicon
-runners must pass a launch smoke test before an installer is published.
+validation. Developer ID releases keep Hardened Runtime enabled. Apple silicon must pass a launch smoke test before publishing. The Intel runner also checks
+startup, with only its known virtual Metal driver assertion allowed as an unavailable GUI check;
+signature and loader failures remain fatal.
 
 It needs, all kept outside this repository:
 

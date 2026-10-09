@@ -21,8 +21,11 @@ for their local ad-hoc signature. The Developer ID Release configuration and
 
 ## Release gate
 
-The Intel runner builds both slices and validates the signature. It runs
+The Intel runner builds both slices and validates the signature. It attempts
 `scripts/smoke-test-app.sh` to check that the app remains running for ten seconds.
+On the hosted Intel runner, the specific Metal assertion `Target device architecture is nil`
+is reported as an unavailable GUI check, after signature and architecture validation. Other
+startup errors remain fatal. Native Intel GUI behavior still requires a real Mac.
 An Apple silicon runner downloads the packaged installer, validates the checksums,
 unpacks the ZIP and runs the same native startup check before publishing the release.
 Signature errors are fatal rather than warnings.
@@ -65,5 +68,8 @@ command palette tool entries and export dialogs. The fork version advances to 1.
 - Localization audit: no missing translations, format mismatches or uncovered labels.
 - Native arm64 startup check on the Release app and the unpacked ZIP.
 
-The updated Intel slice is compiled locally; native Intel startup is enforced by the
-release workflow and still needs to run on an Intel runner for this version.
+The updated Intel slice is compiled locally; the hosted Intel runner aborts in its Metal driver, so native Intel GUI startup still
+needs verification on a real Intel Mac.
+
+A failed tag release can be retried with the Release workflow’s manual dispatch, passing the
+existing version tag. Both build and publish jobs check out that tag; the tag is never moved.
