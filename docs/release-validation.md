@@ -44,13 +44,26 @@ or replace Gatekeeper assessment of a notarized release.
 ## Upstream integration
 
 Integrated upstream `robbietilton/Compositor` main at
-`e1a52105cc5bd7693032053762d8b3f1b6e3741c` (49 commits since the shared base
+`3e099482765b084726ae150a6de2586ba5766d60` (52 commits since the shared base
 `710dd66850496dbb1ac012fe9caa444e8cb738eb`). The update adds command search, canvas-only
 fullscreen, 90-degree canvas rotation, Export As with PNG/JPEG/PDF previews, Last Filter,
-and the dedicated Scanlines filter. It also improves Camera Raw, RAW import, layer
+the dedicated Scanlines filter, and the Navigator minimap. It also improves Camera Raw, RAW import, layer
 reveal behavior, scrolling tool headers and slider tests.
 
 Merge resolutions retain the fork's macOS 15/Intel support, Simplified Chinese
 localization and language switching. New interface strings are translated, including
 command palette tool entries and export dialogs. The fork version advances to 1.4.11
 (build 46) without changing the project file format.
+
+## Local verification on October 9, 2026
+
+- Xcode 16.4 on an Apple silicon Mac running macOS 15.3.
+- Universal 2 Release build for `arm64` and `x86_64`.
+- Full `CompositorTests`: 552 tests passed after the first upstream merge.
+- After the subsequent Navigator merge: all 23 Navigator, command palette and
+  localization tests passed, including the nine new Navigator tests.
+- Localization audit: no missing translations, format mismatches or uncovered labels.
+- Native arm64 startup check on the Release app and the unpacked ZIP.
+
+The updated Intel slice is compiled locally; native Intel startup is enforced by the
+release workflow and still needs to run on an Intel runner for this version.
