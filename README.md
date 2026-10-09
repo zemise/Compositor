@@ -9,7 +9,9 @@ Because it’s open source, you can download the Xcode project and add, remove, 
 ## Installation
 
 ### Download
-Get Compositor from [robbietilton.com/compositor](https://robbietilton.com/compositor), or download the latest release directly from [GitHub Releases](https://github.com/robbietilton/Compositor/releases/latest).
+The community installers for this fork are available from [zemise/Compositor Releases](https://github.com/zemise/Compositor/releases). See [community release validation](docs/release-validation.md) for signing and compatibility details.
+
+Official upstream builds: Get Compositor from [robbietilton.com/compositor](https://robbietilton.com/compositor), or download the latest release directly from [GitHub Releases](https://github.com/robbietilton/Compositor/releases/latest).
 
 ### Homebrew
 
@@ -57,18 +59,21 @@ brew install --cask robbietilton-compositor
 - Camera Raw filter: light, color, curves, color mixer, color grading, detail, optics and geometry, in a panel beside the canvas
 - Levels (with Auto), Curves, Hue/Saturation, Exposure, Gradient Map, Grain, Black & White, Color Balance and Invert
 - Gaussian Blur and Motion Blur that spread past a layer's edges
-- Add Noise, Vignette, Bloom / Glow, Tonal Contrast, Lens Correction and Remove Background
+- Add Noise, Vignette, Bloom / Glow, Dither, Scanlines, Tonal Contrast, Lens Correction and Remove Background
 - Live previews, limited to the selection when there is one
+- Last Filter (⌃⌘F) runs the last filter again with the same settings
 
 ### Canvas and files
 - Multiple projects in tabs
+- Search Commands (⌘F): find every menu command and tool by name, as in Raycast or Obsidian, and run it with Return
+- Toggle Fullscreen (F): the canvas alone on black over the whole screen, with every panel put away; F or Esc brings them back
 - Rulers (⌘R), guides dragged from them, a layout grid with adjustable spacing and subdivisions, and Snap To for guides, grid, layers and document bounds
 - Crop with snapping, ratios including 3:4 and 9:16, and Option for symmetric cropping; with a selection, the crop starts at it
 - Canvas Size, Image Size and Trim
 - Sharp high-quality downsampling when zoomed out, and a pixel grid when zoomed in
 - Import JPEG, PNG, HEIC, TIFF, SVG, camera RAW (with a develop step first) and Photoshop PSD and PSB (8-bit RGB; not CMYK). Photoshop folders, masks, blend modes, fill rectangles/ellipses, and simple horizontal text stay editable; other vectors and vertical text become pixels. A conversion report is shown before anything is applied.
 - Large documents: the memory budget scales with your Mac, and a Photoshop file too big to open has its layers cropped to the canvas instead
-- Export JPEG with a live preview (⇧⌥⌘S); Copy Merged
+- Export PNG (⇧⌘E), Export JPEG (⇧⌥⌘S), and Export As (⇧⌥⌘W) for PNG, JPEG or a one-page PDF at the print size, scaled if you like, with a live preview, JPEG quality and file size; Copy Merged
 - Keep working while a project saves
 - Photoshop-style keyboard shortcuts throughout, remappable in Edit > Keyboard Shortcuts
 - Drag a number's label to scrub its value, as in Photoshop
@@ -97,9 +102,12 @@ Release builds are Universal 2 applications containing both `arm64` and `x86_64`
 `scripts/release.sh` builds a Universal 2 Release version, verifies both architectures, signs it with Developer ID, notarizes and staples it, and packages it into `dist/Compositor-<version>.dmg`.
 
 For a GitHub-hosted community build, push a version tag matching `MARKETING_VERSION` (for example,
-`v1.4.10`). The Release workflow builds a Universal 2 ZIP and, where the runner supports disk-image
+`v1.4.11`). The Release workflow builds a Universal 2 ZIP and, where the runner supports disk-image
 creation, a DMG; it publishes the installers and SHA-256 checksums to GitHub Releases. These
-automated packages are ad-hoc signed rather than Apple-notarized.
+automated packages are ad-hoc signed rather than Apple-notarized. Hardened Runtime is disabled
+only for these community builds because ad-hoc signatures have no Team ID for Sparkle library
+validation. Developer ID releases keep Hardened Runtime enabled. Both Intel and Apple silicon
+runners must pass a launch smoke test before an installer is published.
 
 It needs, all kept outside this repository:
 

@@ -48,6 +48,9 @@ jobs:
           ARCHS='arm64 x86_64'
           ONLY_ACTIVE_ARCH=NO
           CODE_SIGN_IDENTITY=-
+          CODE_SIGN_STYLE=Manual
+          DEVELOPMENT_TEAM=''
+          ENABLE_HARDENED_RUNTIME=NO
 
       - name: Verify app architectures
         run: |
@@ -56,9 +59,10 @@ jobs:
           executable="$app/Contents/MacOS/Compositor"
           test -d "$app"
           lipo "$executable" -verify_arch arm64 x86_64
-          if ! codesign --verify --deep --strict --verbose=2 "$app"; then
-            echo '::warning::The runner cannot validate the temporary signature of every Sparkle component.'
-          fi
+          codesign --verify --deep --strict --verbose=2 "$app"
+
+      - name: Smoke test on Intel
+        run: scripts/smoke-test-app.sh DerivedData/Build/Products/Release/Compositor.app x86_64
 
       - name: Package installers
         run: |
@@ -76,6 +80,41 @@ jobs:
             (cd dist && shasum -a 256 Compositor.dmg >> SHA256SUMS.txt)
           fi
 
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: Compositor-${{ env.VERSION }}
+          path: |
+            dist/Compositor.dmg
+            dist/Compositor.zip
+            dist/SHA256SUMS.txt
+          if-no-files-found: error
+
+  publish:
+    name: Apple silicon launch and publish
+    needs: dmg
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Download installers
+        uses: actions/download-artifact@v7
+        with:
+          pattern: Compositor-*
+          merge-multiple: true
+          path: dist
+
+      - name: Verify packaged app on Apple silicon
+        run: |
+          set -euo pipefail
+          (cd dist && shasum -a 256 -c SHA256SUMS.txt)
+          ditto -x -k dist/Compositor.zip unpacked
+          scripts/smoke-test-app.sh unpacked/Compositor.app arm64
+          version=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' unpacked/Compositor.app/Contents/Info.plist)
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -89,13 +128,3 @@ jobs:
           if [[ -f dist/Compositor.dmg ]]; then
             gh release upload "$GITHUB_REF_NAME" dist/Compositor.dmg --repo "$GITHUB_REPOSITORY"
           fi
-
-      - name: Upload installer artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: Compositor-${{ env.VERSION }}
-          path: |
-            dist/Compositor.dmg
-            dist/Compositor.zip
-            dist/SHA256SUMS.txt
-          if-no-files-found: error
