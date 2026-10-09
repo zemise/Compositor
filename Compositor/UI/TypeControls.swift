@@ -115,7 +115,11 @@ private struct TypeFontPicker: NSViewRepresentable {
         let button = FixedWidthPopUpButton(frame: .zero, pullsDown: false)
         if !fontName.isEmpty { button.addItem(withTitle: fontName) }
 #if compiler(>=6.2)
-        button.borderShape = .capsule
+        if #available(macOS 26.0, *) {
+            button.borderShape = .capsule
+        } else {
+            button.bezelStyle = .rounded
+        }
 #else
         button.bezelStyle = .rounded
 #endif

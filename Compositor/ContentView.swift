@@ -181,7 +181,15 @@ struct ContentView: View {
                     .modifier(NewProjectDropTarget(workspace: applicationDelegate?.workspace))
             }
 #if compiler(>=6.2)
-            ToolbarSpacer(.fixed, placement: .navigation)
+                if #available(macOS 26.0, *) {
+            if #available(macOS 26.0, *) {
+                ToolbarSpacer(.fixed, placement: .navigation)
+            } else {
+                    ToolbarItem(placement: .navigation) { Spacer().frame(width: 8) }
+            }
+                } else {
+                ToolbarItem(placement: .navigation) { Spacer().frame(width: 8) }
+                }
 #else
             ToolbarItem(placement: .navigation) { Spacer().frame(width: 8) }
 #endif
@@ -205,7 +213,9 @@ struct ContentView: View {
             // Absorb all remaining navigation-toolbar width before the zoom controls.
             // Without this spacer, the growing tab strip pushes the primary actions left.
 #if compiler(>=6.2)
-            ToolbarSpacer(.flexible, placement: .navigation)
+            if #available(macOS 26.0, *) {
+                ToolbarSpacer(.flexible, placement: .navigation)
+            }
 #endif
             ToolbarItem(placement: .primaryAction) {
                 Button("Fit") { session.fit() }.help("Fit canvas in window (⌘0)")
